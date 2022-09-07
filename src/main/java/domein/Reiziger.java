@@ -38,6 +38,6 @@ public class Reiziger {
     }
 
     public String toString() {
-        return String.format("id: %s\nvoorleeters: %s\ntussenvoegsels: %s\nachternaam: %s\ngeboortedatum: %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);
+        return String.format("id: %s\nvoorletters: %s\ntussenvoegsel: %s\nachternaam: %s\ngeboortedatum: %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);
     }
 }

@@ -2,9 +2,8 @@ package dao.Reiziger;
 
 import domein.Reiziger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReizigerDAOsql implements ReizigerDAO {
@@ -69,16 +68,69 @@ public class ReizigerDAOsql implements ReizigerDAO {
 
     @Override
     public Reiziger findById(int id) {
-        return null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM reiziger where reiziger_id = ?");
+            statement.setInt(1, id);
+            ResultSet results = statement.executeQuery();
+
+            // maak van de resultset een reiziger en geef deze terug
+            results.next();
+            return krijgReizigerResultset(results);
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @Override
     public List<Reiziger> findByGbdatum(String datum) {
-        return null;
+        try{
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM reiziger WHERE geboortedatum = ?");
+            Date date = Date.valueOf(datum);
+            statement.setDate(1, date);
+
+            ResultSet results = statement.executeQuery();
+            List<Reiziger> reizigers = new ArrayList<>();
+            while (results.next()) {
+
+                reizigers.add(krijgReizigerResultset(results));
+            }
+            return reizigers;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @Override
     public List<Reiziger> findAll() {
-        return null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM reiziger;");
+            List<Reiziger> reizigers = new ArrayList<>();
+
+            while(results.next()) {
+                 reizigers.add(krijgReizigerResultset(results));
+            }
+            return reizigers;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public Reiziger krijgReizigerResultset(ResultSet results) throws SQLException {
+        int id = results.getInt(1);
+        String voorletters = results.getString(2);
+        String tussenvoegsel = results.getString(3);
+        if (tussenvoegsel == null) {
+            tussenvoegsel = "";
+        }
+        String achternaam = results.getString(4);
+        Date geboortedatum = results.getDate(5);
+        return new Reiziger(id, voorletters, tussenvoegsel, achternaam, geboortedatum);
     }
 }
