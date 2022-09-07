@@ -17,6 +17,26 @@ public class Reiziger {
         this.geboortedatum = geboortedatum;
     }
 
+    public int getReizigerId() {
+        return reizigerId;
+    }
+
+    public String getVoorletters() {
+        return voorletters;
+    }
+
+    public String getTussenvoegsel() {
+        return tussenvoegsel;
+    }
+
+    public String getAchternaam() {
+        return achternaam;
+    }
+
+    public Date getGeboortedatum() {
+        return geboortedatum;
+    }
+
     public String toString() {
         return String.format("id: %s\nvoorleeters: %s\ntussenvoegsels: %s\nachternaam: %s\ngeboortedatum: %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);
     }
