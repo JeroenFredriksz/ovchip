@@ -1,5 +1,6 @@
 package dao.Reiziger;
 
+import dao.Adres.AdresDAOsql;
 import domein.Reiziger;
 
 import java.sql.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class ReizigerDAOsql implements ReizigerDAO {
     private Connection connection;
+    private AdresDAOsql adresDAOsql;
 
     public ReizigerDAOsql (Connection connection) {
         this.connection = connection;
@@ -132,5 +134,9 @@ public class ReizigerDAOsql implements ReizigerDAO {
         String achternaam = results.getString(4);
         Date geboortedatum = results.getDate(5);
         return new Reiziger(id, voorletters, tussenvoegsel, achternaam, geboortedatum);
+    }
+
+    public void setAdresDAOsql(AdresDAOsql adresDAOsql) {
+        this.adresDAOsql = adresDAOsql;
     }
 }
