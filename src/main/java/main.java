@@ -24,26 +24,32 @@ public class main {
 
             // save test
 
+
             String gbdatum = "1981-03-14";
             Reiziger sietske = new Reiziger(78, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
+            System.out.println("\nreiziger aanmaken test, TRUE al gaat het goed:\n");
             System.out.println(reizigerDAOsql.save(sietske));
 
             // update test
 
             Reiziger updatedSietske = new Reiziger(78, "S", "van", "Specht", java.sql.Date.valueOf(gbdatum));
+            System.out.println("\nreiziger update test, TRUE al gaat het goed:\n");
             System.out.println((reizigerDAOsql.update(updatedSietske)));
 
             // delete test
 
+            System.out.println("\nreiziger delete test, TRUE al gaat het goed:\n");
             System.out.println(reizigerDAOsql.delete(updatedSietske));
 
+
             // find by id test
+            System.out.println("\nreiziger find by id, gegevens van reiziger met id 1 al gaat het goed:\n");
             System.out.println(reizigerDAOsql.findById(1).toString());
 
             // find by datum test
 
             List<Reiziger> reizigers = reizigerDAOsql.findByGbdatum("2002-12-03");
-            System.out.println("\ndatum test\n");
+            System.out.println("\nreiziger find by datum test, gegevens van reiziger met geboortedatum 2002-12-3 al gaat het goed\n");
             for (Reiziger perReiziger : reizigers) {
                 System.out.println(perReiziger.toString());
                 System.out.println("\n");
@@ -68,34 +74,35 @@ public class main {
             //adres save test
 
             Adres adres = new Adres(reizigerDAOsql.findById(10), 10, "2420DH", "20", "Winde", "Gouda");
-            System.out.println("adres save test, TRUE al gaat het goed");
+            System.out.println("\nadres save test, TRUE al gaat het goed\n");
             System.out.println(adresDAOsql.save(adres));
 
             //adres update test
 
             Adres nieuwAdres = new Adres(reizigerDAOsql.findById(10), 10, "2420DH", "30", "Winde", "Rotterdam");
-            System.out.println("\nadres update test, TRUE al gaat het goed");
+            System.out.println("\nadres update test, TRUE al gaat het goed\n");
             System.out.println(adresDAOsql.update(nieuwAdres));
 
-            // adres update test
+            // adres delete test
 
-            System.out.println("\nadres delete test, TRUE al gaat het goed");
+            System.out.println("\nadres delete test, TRUE al gaat het goed\n");
             System.out.println(adresDAOsql.delete(nieuwAdres));
 
             //adres find by id test
-
-            adresDAOsql.save(adres);
-            System.out.println("\nadres find by id test, adres.toString al gaat het goed");
-            System.out.println(adresDAOsql.findById(10));
+            System.out.println("\nadres find by id test, gegevens van reiziger met id 5 al gaat het goed\n");
+            Adres adres5 = adresDAOsql.findById(5);
+            System.out.println(adres5);
 
             // adres find by reiziger test
 
-            System.out.println("\nadres find by reiziger test, adres.toString al gaat het goed");
-            System.out.println(adresDAOsql.findByReiziger(reiziger));
+
+            System.out.println("\nadres find by reiziger test, gegevens van reiziger met id 5 al gaat het goed\n");
+            Reiziger reiziger5 = reizigerDAOsql.findById(adres5.getReiziger().getReizigerId());
+            System.out.println(adresDAOsql.findByReiziger(reiziger5));
 
             //adres findall
 
-            System.out.println("\n adres find all, meerdere adres.toString al gaat het goed");
+            System.out.println("\n adres find all, meerdere adres.toString al gaat het goed\n");
             for (Adres perAdres : adresDAOsql.findAll()) {
                 System.out.println(perAdres);
             }

@@ -92,8 +92,9 @@ public class ReizigerDAOsql implements ReizigerDAO {
 
             // maak van de resultset een reiziger en geef deze terug
             results.next();
+            Reiziger reiziger = krijgReizigerResultset(results);
             statement.close();
-            return krijgReizigerResultset(results);
+            return reiziger;
 
         } catch (Exception e) {
             System.out.println(e);
@@ -145,9 +146,6 @@ public class ReizigerDAOsql implements ReizigerDAO {
         int id = results.getInt(1);
         String voorletters = results.getString(2);
         String tussenvoegsel = results.getString(3);
-        if (tussenvoegsel == null) {
-            tussenvoegsel = "";
-        }
         String achternaam = results.getString(4);
         Date geboortedatum = results.getDate(5);
         return new Reiziger(id, voorletters, tussenvoegsel, achternaam, geboortedatum);
