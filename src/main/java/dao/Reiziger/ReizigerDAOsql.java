@@ -28,6 +28,10 @@ public class ReizigerDAOsql implements ReizigerDAO {
             statement.execute();
             statement.close();
 
+            if (reiziger.getAdres() != null) {
+                adresDAOsql.save(reiziger.getAdres());
+            }
+
             return true;
         } catch (Exception e) {
             System.out.println(e);
@@ -46,6 +50,11 @@ public class ReizigerDAOsql implements ReizigerDAO {
             statement.setDate(4, reiziger.getGeboortedatum());
             statement.setInt(5, reiziger.getReizigerId());
             statement.execute();
+            statement.close();
+
+            if (reiziger.getAdres() != null) {
+                adresDAOsql.update(reiziger.getAdres());
+            }
 
             return true;
         } catch (Exception e) {
@@ -61,6 +70,12 @@ public class ReizigerDAOsql implements ReizigerDAO {
             statement.setInt(1, reiziger.getReizigerId());
 
             statement.execute();
+            statement.close();
+
+            if (reiziger.getAdres() != null) {
+                adresDAOsql.delete(reiziger.getAdres());
+            }
+
             return true;
         } catch (Exception e) {
             System.out.println(e);
@@ -77,8 +92,8 @@ public class ReizigerDAOsql implements ReizigerDAO {
 
             // maak van de resultset een reiziger en geef deze terug
             results.next();
+            statement.close();
             return krijgReizigerResultset(results);
-
 
         } catch (Exception e) {
             System.out.println(e);
@@ -99,6 +114,7 @@ public class ReizigerDAOsql implements ReizigerDAO {
 
                 reizigers.add(krijgReizigerResultset(results));
             }
+            statement.close();
             return reizigers;
 
         } catch (Exception e) {
@@ -117,6 +133,7 @@ public class ReizigerDAOsql implements ReizigerDAO {
             while(results.next()) {
                  reizigers.add(krijgReizigerResultset(results));
             }
+            statement.close();
             return reizigers;
         } catch (Exception e) {
             System.out.println(e);

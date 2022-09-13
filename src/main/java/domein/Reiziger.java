@@ -42,6 +42,10 @@ public class Reiziger {
         return geboortedatum;
     }
 
+    public Adres getAdres () {
+        return adres;
+    }
+
     public String toString() {
         if (adres == null) {
             return String.format("id: %s, %s %s %s, %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);

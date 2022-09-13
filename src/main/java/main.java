@@ -8,7 +8,7 @@ import java.util.List;
 
 public class main {
     public static void main(String[] args){
-        String url = "jdbc:postgresql://localhost:5433/ovchip";
+        String url = "jdbc:postgresql://localhost:5432/ovchip";
         String username = "postgres";
         String password = "postgres";
 
