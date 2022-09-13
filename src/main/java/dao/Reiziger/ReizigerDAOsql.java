@@ -1,6 +1,7 @@
 package dao.Reiziger;
 
 import dao.Adres.AdresDAOsql;
+import domein.Adres;
 import domein.Reiziger;
 
 import java.sql.*;
@@ -93,6 +94,11 @@ public class ReizigerDAOsql implements ReizigerDAO {
             // maak van de resultset een reiziger en geef deze terug
             results.next();
             Reiziger reiziger = krijgReizigerResultset(results);
+
+            Adres adres = adresDAOsql.findByReiziger(reiziger);
+            if (adres != null) {
+                reiziger.setAdres(adres);
+            }
             statement.close();
             return reiziger;
 
@@ -112,8 +118,13 @@ public class ReizigerDAOsql implements ReizigerDAO {
             ResultSet results = statement.executeQuery();
             List<Reiziger> reizigers = new ArrayList<>();
             while (results.next()) {
+                Reiziger reiziger = krijgReizigerResultset(results);
+                Adres adres = adresDAOsql.findByReiziger(reiziger);
+                if (adres != null) {
+                    reiziger.setAdres(adres);
+                }
+                reizigers.add(reiziger);
 
-                reizigers.add(krijgReizigerResultset(results));
             }
             statement.close();
             return reizigers;
@@ -132,7 +143,12 @@ public class ReizigerDAOsql implements ReizigerDAO {
             List<Reiziger> reizigers = new ArrayList<>();
 
             while(results.next()) {
-                 reizigers.add(krijgReizigerResultset(results));
+                Reiziger reiziger = krijgReizigerResultset(results);
+                Adres adres = adresDAOsql.findByReiziger(reiziger);
+                if (adres != null) {
+                    reiziger.setAdres(adres);
+                }
+                 reizigers.add(reiziger);
             }
             statement.close();
             return reizigers;

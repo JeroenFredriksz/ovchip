@@ -47,10 +47,17 @@ public class Reiziger {
     }
 
     public String toString() {
-        if (adres == null) {
-            return String.format("reiziger id: %s, %s %s %s, %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);
-
+        String convertedTussenVoegsel;
+        if (tussenvoegsel == null) {
+            convertedTussenVoegsel = "";
         }
-        return String.format("reiziger id: %s, %s %s %s, %s\nadresId: %s, %s %s %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum, adres.getAdresId(), adres.getStraat(), adres.getHuisnummer(), adres.getWoonplaats());
+        else {
+            convertedTussenVoegsel = String.format(" %s ", tussenvoegsel);
+        }
+        String returnstring = String.format("reiziger id: %s, %s %s %s, %s", reizigerId, voorletters, convertedTussenVoegsel, achternaam, geboortedatum);
+        if (adres != null) {
+            returnstring += "\n" + adres;
+        }
+        return returnstring;
     }
 }

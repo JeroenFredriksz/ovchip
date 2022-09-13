@@ -83,16 +83,18 @@ public class AdresDAOsql implements AdresDAO{
             statement.setInt(1, adres_id);
             ResultSet results = statement.executeQuery();
 
-            results.next();
-            String postcode = results.getString(2);
-            String huisnummer = results.getString(3);
-            String straat = results.getString(4);
-            String woonplaats = results.getString(5);
+            if(results.next()) {
+                String postcode = results.getString(2);
+                String huisnummer = results.getString(3);
+                String straat = results.getString(4);
+                String woonplaats = results.getString(5);
 
-            int reiziger_id = results.getInt(6);
-            Reiziger reiziger = reizigerDAOsql.findById(reiziger_id);
+                int reiziger_id = results.getInt(6);
+                Reiziger reiziger = reizigerDAOsql.findById(reiziger_id);
 
-            return new Adres(reiziger, adres_id, postcode, huisnummer, straat, woonplaats);
+                return new Adres(reiziger, adres_id, postcode, huisnummer, straat, woonplaats);
+            }
+            return null;
         } catch (Exception e) {
             System.out.println(e);
             return null;
@@ -107,15 +109,17 @@ public class AdresDAOsql implements AdresDAO{
             statement.setInt(1, reiziger_id);
             ResultSet results = statement.executeQuery();
 
-            results.next();
-            int adres_id = results.getInt(1);
-            String postcode = results.getString(2);
-            String huisnummer = results.getString(3);
-            String straat = results.getString(4);
-            String woonplaats = results.getString(5);
+            if(results.next()){
+                int adres_id = results.getInt(1);
+                String postcode = results.getString(2);
+                String huisnummer = results.getString(3);
+                String straat = results.getString(4);
+                String woonplaats = results.getString(5);
 
 
-            return new Adres(reiziger, adres_id, postcode, huisnummer, straat, woonplaats);
+                return new Adres(reiziger, adres_id, postcode, huisnummer, straat, woonplaats);
+            }
+            return null;
 
         } catch (Exception e) {
             System.out.println(e);

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class main {
     public static void main(String[] args){
-        String url = "jdbc:postgresql://localhost:5432/ovchip";
+        String url = "jdbc:postgresql://localhost:5433/ovchip";
         String username = "postgres";
         String password = "postgres";
 
@@ -23,7 +23,6 @@ public class main {
 
 
             // save test
-
 
             String gbdatum = "1981-03-14";
             Reiziger sietske = new Reiziger(78, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
