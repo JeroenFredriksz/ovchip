@@ -2,6 +2,7 @@ import dao.Adres.AdresDAOsql;
 import dao.Ov_chipkaart.Ov_chipkaartDAOsql;
 import dao.Reiziger.ReizigerDAOsql;
 import domein.Adres;
+import domein.Ov_chipkaart;
 import domein.Reiziger;
 
 import java.sql.*;
@@ -113,8 +114,53 @@ public class main {
                 System.out.println(perAdres);
             }
 
+            //p4 testing
+
+            Reiziger reizigerp4 = new Reiziger(12, "J", "null", "Fredriksz", Date.valueOf("2003-07-30"));
+            reizigerDAOsql.save(reizigerp4);
+            System.out.println("\ntesting p4\n");
+
+            // ov_chipkaart save test
+
+            Ov_chipkaart ov_chipkaart = new Ov_chipkaart(12, Date.valueOf("2025-01-01"), 2, 50.00, reizigerDAOsql.findById(12));
+            System.out.println("\nov_chipkaart save test, TRUE al gaat het goed\n");
+            System.out.println(ov_chipkaartDAOsql.save(ov_chipkaart));
+
+            // ov_chipkaart update test
+
+            Ov_chipkaart ov_chipkaart2 = new Ov_chipkaart(12, Date.valueOf("2025-01-01"), 3, 50.00, reizigerDAOsql.findById(12));
+            System.out.println("\nov_chipkaart update test, TRUE al gaat het goed\n");
+            System.out.println(ov_chipkaartDAOsql.update(ov_chipkaart2));
 
 
+            // ov_chipkaart findById test
+
+            System.out.println("\nov_chipkaart findById test, toString van ov_chipkaart met kaartnummer 12 al gaat het goed\n");
+            System.out.println(ov_chipkaartDAOsql.findById(12));
+
+            // ov_chipkaart find by reiziger test
+
+            System.out.println("\nov_chipkaart find by reiziger test, gegevens van ov_chipkaart met kaartnummer 12 al gaat het goed\n");
+            List<Ov_chipkaart> chipkaarten = ov_chipkaartDAOsql.findByReiziger(reizigerp4);
+            for (Ov_chipkaart perChipkaart : chipkaarten) {
+                System.out.println(perChipkaart);
+            }
+
+            // ov_chipkaart find all test
+
+            System.out.println("\nov_chipkaart find all test, gegevens van alle kaarten al gaat het goed\n");
+            List<Ov_chipkaart> chipkaarten2 = ov_chipkaartDAOsql.findAll();
+            for (Ov_chipkaart perChipkaart : chipkaarten2) {
+                System.out.println(perChipkaart);
+            }
+
+            // ov_chipkaart delete test
+
+//            System.out.println("\nov_chipkaart delete test, TRUE al gaat het goed\n");
+//            System.out.println(ov_chipkaartDAOsql.delete(ov_chipkaart2));
+//
+//            //cleanup
+//            reizigerDAOsql.delete(reizigerDAOsql.findById(12));
 
             connection.close();
         } catch (Exception e) {

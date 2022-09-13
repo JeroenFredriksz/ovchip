@@ -69,6 +69,7 @@ public class AdresDAOsql implements AdresDAO{
             statement.setInt(1, adres.getAdresId());
 
             statement.execute();
+            adres.getReiziger().setAdres(null);
             return true;
         } catch (Exception e) {
             System.out.println(e);

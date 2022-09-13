@@ -62,10 +62,23 @@ public class Reiziger {
         if (adres != null) {
             returnstring += "\n" + adres;
         }
+        if (chipkaarten.size() != 0) {
+            for (Ov_chipkaart perChipkaart : chipkaarten) {
+                returnstring += "\n" + perChipkaart;
+            }
+        }
         return returnstring;
+    }
+
+    public void removeChipKaart (Ov_chipkaart ov_chipkaart) {
+        chipkaarten.remove(ov_chipkaart);
     }
 
     public void addChipkaart (Ov_chipkaart ov_chipkaart) {
         chipkaarten.add(ov_chipkaart);
+    }
+
+    public List<Ov_chipkaart> getChipkaarten() {
+        return chipkaarten;
     }
 }

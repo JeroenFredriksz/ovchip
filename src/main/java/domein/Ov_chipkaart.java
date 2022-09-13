@@ -6,10 +6,10 @@ public class Ov_chipkaart {
     private int kaart_nummer;
     private Date geldig_tot;
     private int klasse;
-    private float saldo;
+    private double saldo;
     private Reiziger reiziger;
 
-    public Ov_chipkaart(int kaart_nummer, Date geldig_tot, int klasse, float saldo, Reiziger reiziger) {
+    public Ov_chipkaart(int kaart_nummer, Date geldig_tot, int klasse, double saldo, Reiziger reiziger) {
         this.kaart_nummer = kaart_nummer;
         this.geldig_tot = geldig_tot;
         this.klasse = klasse;
@@ -31,11 +31,15 @@ public class Ov_chipkaart {
         return klasse;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
     public Reiziger getReiziger() {
         return reiziger;
+    }
+
+    public String toString () {
+        return String.format("kaartnummer: %S, klasse: %s, geldig tot: %s, saldo: %S", kaart_nummer, klasse, geldig_tot, saldo);
     }
 }

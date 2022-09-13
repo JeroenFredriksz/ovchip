@@ -24,7 +24,7 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
             statement.setInt(1, ov_chipkaart.getKaart_nummer());
             statement.setDate(2, ov_chipkaart.getGeldig_tot());
             statement.setInt(3, ov_chipkaart.getKlasse());
-            statement.setFloat(4, ov_chipkaart.getSaldo());
+            statement.setDouble(4, ov_chipkaart.getSaldo());
             statement.setInt(5, ov_chipkaart.getReiziger().getReizigerId());
 
             statement.execute();
@@ -43,7 +43,7 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
             PreparedStatement statement = connection.prepareStatement("UPDATE ov_chipkaart SET geldig_tot = ?, klasse = ?, saldo = ? where kaart_nummer = ?");
             statement.setDate(1, ov_chipkaart.getGeldig_tot());
             statement.setInt(2, ov_chipkaart.getKlasse());
-            statement.setFloat(3, ov_chipkaart.getSaldo());
+            statement.setDouble(3, ov_chipkaart.getSaldo());
             statement.setInt(4, ov_chipkaart.getKaart_nummer());
             statement.execute();
             statement.close();
@@ -63,6 +63,7 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
             statement.execute();
             statement.close();
 
+            ov_chipkaart.getReiziger().removeChipKaart(ov_chipkaart);
             return true;
         } catch (Exception e) {
             System.out.println(e);
@@ -80,7 +81,7 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
             if (resultSet.next()) {
                 Date geldig_tot = resultSet.getDate(2);
                 int klasse = resultSet.getInt(3);
-                float saldo = resultSet.getFloat(4);
+                Double saldo = resultSet.getDouble(4);
                 int reiziger_id = resultSet.getInt(5);
                 return new Ov_chipkaart(id, geldig_tot, klasse, saldo, reizigerDAOsql.findById(reiziger_id));
             }
@@ -104,7 +105,7 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
                 int kaart_nummer = results.getInt(1);
                 Date geldig_tot = results.getDate(2);
                 int klasse = results.getInt(3);
-                float saldo = results.getFloat(4);
+                Double saldo = results.getDouble(4);
                 ov_chipkaarten.add(new Ov_chipkaart(kaart_nummer, geldig_tot, klasse, saldo, reiziger));
             }
             statement.close();
@@ -126,7 +127,7 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
                 int kaart_nummer = results.getInt(1);
                 Date geldig_tot = results.getDate(2);
                 int klasse = results.getInt(3);
-                float saldo = results.getFloat(4);
+                double saldo = results.getDouble(4);
                 int reiziger_id = results.getInt(5);
                 ov_chipkaarten.add(new Ov_chipkaart(kaart_nummer, geldig_tot, klasse, saldo, reizigerDAOsql.findById(reiziger_id)));
             }

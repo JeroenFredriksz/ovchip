@@ -3,6 +3,7 @@ package dao.Reiziger;
 import dao.Adres.AdresDAOsql;
 import dao.Ov_chipkaart.Ov_chipkaartDAOsql;
 import domein.Adres;
+import domein.Ov_chipkaart;
 import domein.Reiziger;
 
 import java.sql.*;
@@ -69,15 +70,21 @@ public class ReizigerDAOsql implements ReizigerDAO {
     @Override
     public boolean delete(Reiziger reiziger) {
         try {
+            if (reiziger.getAdres() != null) {
+                adresDAOsql.delete(reiziger.getAdres());
+            }
+            if (reiziger.getChipkaarten().size() > 0) {
+                for (Ov_chipkaart perChipkaart : reiziger.getChipkaarten()) {
+                    ov_chipkaartDAOsql.delete(perChipkaart);
+                }
+            }
+
             PreparedStatement statement = connection.prepareStatement("DELETE From reiziger WHERE reiziger_id = ?");
             statement.setInt(1, reiziger.getReizigerId());
 
             statement.execute();
             statement.close();
 
-            if (reiziger.getAdres() != null) {
-                adresDAOsql.delete(reiziger.getAdres());
-            }
 
             return true;
         } catch (Exception e) {
