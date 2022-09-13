@@ -1,6 +1,8 @@
 package domein;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reiziger {
     int reizigerId;
@@ -9,6 +11,7 @@ public class Reiziger {
     private String achternaam;
     private Date geboortedatum;
     private Adres adres;
+    private List<Ov_chipkaart> chipkaarten;
 
     public Reiziger(int reizigerId, String voorletters, String tussenvoegsel, String achternaam, Date geboortedatum) {
         this.reizigerId = reizigerId;
@@ -16,6 +19,7 @@ public class Reiziger {
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
+        chipkaarten = new ArrayList<>();
     }
 
     public void setAdres(Adres adres) {
@@ -59,5 +63,9 @@ public class Reiziger {
             returnstring += "\n" + adres;
         }
         return returnstring;
+    }
+
+    public void addChipkaart (Ov_chipkaart ov_chipkaart) {
+        chipkaarten.add(ov_chipkaart);
     }
 }

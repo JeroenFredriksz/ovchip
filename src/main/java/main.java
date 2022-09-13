@@ -1,4 +1,5 @@
 import dao.Adres.AdresDAOsql;
+import dao.Ov_chipkaart.Ov_chipkaartDAOsql;
 import dao.Reiziger.ReizigerDAOsql;
 import domein.Adres;
 import domein.Reiziger;
@@ -17,9 +18,12 @@ public class main {
 
             ReizigerDAOsql reizigerDAOsql = new ReizigerDAOsql(connection);
             AdresDAOsql adresDAOsql = new AdresDAOsql(connection);
+            Ov_chipkaartDAOsql ov_chipkaartDAOsql = new Ov_chipkaartDAOsql(connection);
 
-            reizigerDAOsql.setAdresDAOsql(adresDAOsql);
             adresDAOsql.setReizigerDAOsql(reizigerDAOsql);
+            reizigerDAOsql.setAdresDAOsql(adresDAOsql);
+            reizigerDAOsql.setOv_chipkaartDAOsql(ov_chipkaartDAOsql);
+            ov_chipkaartDAOsql.setReizigerDAOsql(reizigerDAOsql);
 
 
             // save test

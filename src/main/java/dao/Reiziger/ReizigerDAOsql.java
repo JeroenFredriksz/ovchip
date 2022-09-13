@@ -1,6 +1,7 @@
 package dao.Reiziger;
 
 import dao.Adres.AdresDAOsql;
+import dao.Ov_chipkaart.Ov_chipkaartDAOsql;
 import domein.Adres;
 import domein.Reiziger;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class ReizigerDAOsql implements ReizigerDAO {
     private Connection connection;
     private AdresDAOsql adresDAOsql;
+    private Ov_chipkaartDAOsql ov_chipkaartDAOsql;
 
     public ReizigerDAOsql (Connection connection) {
         this.connection = connection;
@@ -169,5 +171,9 @@ public class ReizigerDAOsql implements ReizigerDAO {
 
     public void setAdresDAOsql(AdresDAOsql adresDAOsql) {
         this.adresDAOsql = adresDAOsql;
+    }
+
+    public void setOv_chipkaartDAOsql(Ov_chipkaartDAOsql ov_chipkaartDAOsql) {
+        this.ov_chipkaartDAOsql = ov_chipkaartDAOsql;
     }
 }
