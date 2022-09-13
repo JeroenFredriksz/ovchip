@@ -45,6 +45,6 @@ public class Adres {
     }
 
     public String toString() {
-        return String.format("adresId: %s, %s, %s %s %s\nreiziger_id: %s, %s %s %s", adresId, postcode, straat, huisnummer, woonplaats, reiziger.reizigerId, reiziger.getVoorletters(), reiziger.getTussenvoegsel(), reiziger.getAchternaam());
+        return reiziger.toString();
     }
 }

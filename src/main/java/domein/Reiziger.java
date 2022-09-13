@@ -48,9 +48,9 @@ public class Reiziger {
 
     public String toString() {
         if (adres == null) {
-            return String.format("id: %s, %s %s %s, %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);
+            return String.format("reiziger id: %s, %s %s %s, %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum);
 
         }
-        return String.format("id: %s, %s %s %s, %s\nadresId: %s, %s %s %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum, adres.getAdresId(), adres.getStraat(), adres.getHuisnummer(), adres.getWoonplaats());
+        return String.format("reiziger id: %s, %s %s %s, %s\nadresId: %s, %s %s %s", reizigerId, voorletters, tussenvoegsel, achternaam, geboortedatum, adres.getAdresId(), adres.getStraat(), adres.getHuisnummer(), adres.getWoonplaats());
     }
 }

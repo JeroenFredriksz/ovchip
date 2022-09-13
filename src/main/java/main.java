@@ -88,6 +88,9 @@ public class main {
             System.out.println("\nadres delete test, TRUE al gaat het goed\n");
             System.out.println(adresDAOsql.delete(nieuwAdres));
 
+            // reiziger met id 10 verwijderen omdat die is aangemaakt puur voor het testen
+            reizigerDAOsql.delete(reiziger);
+
             //adres find by id test
             System.out.println("\nadres find by id test, gegevens van reiziger met id 5 al gaat het goed\n");
             Adres adres5 = adresDAOsql.findById(5);
