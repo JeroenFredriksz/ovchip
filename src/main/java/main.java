@@ -10,7 +10,7 @@ import java.util.List;
 
 public class main {
     public static void main(String[] args){
-        String url = "jdbc:postgresql://localhost:5433/ovchip";
+        String url = "jdbc:postgresql://localhost:5432/ovchip";
         String username = "postgres";
         String password = "postgres";
 
@@ -154,13 +154,17 @@ public class main {
                 System.out.println(perChipkaart);
             }
 
+            System.out.println("\n\ntest\n\n");
+            System.out.println(reizigerDAOsql.findById(12));
+            // print iets fout!!!!!
+
             // ov_chipkaart delete test
 
-//            System.out.println("\nov_chipkaart delete test, TRUE al gaat het goed\n");
-//            System.out.println(ov_chipkaartDAOsql.delete(ov_chipkaart2));
-//
-//            //cleanup
-//            reizigerDAOsql.delete(reizigerDAOsql.findById(12));
+            System.out.println("\nov_chipkaart delete test, TRUE al gaat het goed\n");
+            System.out.println(ov_chipkaartDAOsql.delete(ov_chipkaart2));
+
+            //cleanup
+            reizigerDAOsql.delete(reizigerDAOsql.findById(12));
 
             connection.close();
         } catch (Exception e) {

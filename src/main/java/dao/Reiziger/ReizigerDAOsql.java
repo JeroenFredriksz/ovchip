@@ -35,6 +35,11 @@ public class ReizigerDAOsql implements ReizigerDAO {
             if (reiziger.getAdres() != null) {
                 adresDAOsql.save(reiziger.getAdres());
             }
+            if (reiziger.getChipkaarten().size() != 0) {
+                for (Ov_chipkaart perChipKaart : reiziger.getChipkaarten()) {
+                    ov_chipkaartDAOsql.save(perChipKaart);
+                }
+            }
 
             return true;
         } catch (Exception e) {
@@ -60,6 +65,12 @@ public class ReizigerDAOsql implements ReizigerDAO {
                 adresDAOsql.update(reiziger.getAdres());
             }
 
+            if (reiziger.getChipkaarten().size() != 0) {
+                for (Ov_chipkaart perChipKaart : reiziger.getChipkaarten()) {
+                    ov_chipkaartDAOsql.update(perChipKaart);
+                }
+            }
+
             return true;
         } catch (Exception e) {
             System.out.println(e);
@@ -76,6 +87,11 @@ public class ReizigerDAOsql implements ReizigerDAO {
             if (reiziger.getChipkaarten().size() > 0) {
                 for (Ov_chipkaart perChipkaart : reiziger.getChipkaarten()) {
                     ov_chipkaartDAOsql.delete(perChipkaart);
+                }
+            }
+            if (reiziger.getChipkaarten().size() != 0) {
+                for (Ov_chipkaart perChipKaart : reiziger.getChipkaarten()) {
+                    ov_chipkaartDAOsql.delete(perChipKaart);
                 }
             }
 
@@ -109,6 +125,13 @@ public class ReizigerDAOsql implements ReizigerDAO {
                 reiziger.setAdres(adres);
             }
             statement.close();
+
+            List<Ov_chipkaart> chipkaarten = ov_chipkaartDAOsql.findByReiziger(reiziger);
+
+            for(Ov_chipkaart perChipkaart : chipkaarten) {
+                reiziger.addChipkaart(perChipkaart);
+            }
+
             return reiziger;
 
         } catch (Exception e) {
