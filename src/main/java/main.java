@@ -120,11 +120,14 @@ public class main {
             reizigerDAOsql.save(reizigerp4);
             System.out.println("\ntesting p4\n");
 
+
+
             // ov_chipkaart save test
 
             Ov_chipkaart ov_chipkaart = new Ov_chipkaart(12, Date.valueOf("2025-01-01"), 2, 50.00, reizigerDAOsql.findById(12));
             System.out.println("\nov_chipkaart save test, TRUE al gaat het goed\n");
             System.out.println(ov_chipkaartDAOsql.save(ov_chipkaart));
+
 
             // ov_chipkaart update test
 
@@ -154,9 +157,6 @@ public class main {
                 System.out.println(perChipkaart);
             }
 
-            System.out.println("\n\ntest\n\n");
-            System.out.println(reizigerDAOsql.findById(12));
-            // print iets fout!!!!!
 
             // ov_chipkaart delete test
 

@@ -128,6 +128,7 @@ public class ReizigerDAOsql implements ReizigerDAO {
 
             List<Ov_chipkaart> chipkaarten = ov_chipkaartDAOsql.findByReiziger(reiziger);
 
+
             for(Ov_chipkaart perChipkaart : chipkaarten) {
                 reiziger.addChipkaart(perChipkaart);
             }
@@ -155,9 +156,14 @@ public class ReizigerDAOsql implements ReizigerDAO {
                 if (adres != null) {
                     reiziger.setAdres(adres);
                 }
+                List<Ov_chipkaart> chipkaarten = ov_chipkaartDAOsql.findByReiziger(reiziger);
+                for (Ov_chipkaart perChipkaart : chipkaarten) {
+                    reiziger.addChipkaart(perChipkaart);
+                }
                 reizigers.add(reiziger);
-
             }
+
+
             statement.close();
             return reizigers;
 
@@ -180,8 +186,13 @@ public class ReizigerDAOsql implements ReizigerDAO {
                 if (adres != null) {
                     reiziger.setAdres(adres);
                 }
+                List<Ov_chipkaart> chipkaarten = ov_chipkaartDAOsql.findByReiziger(reiziger);
+                for (Ov_chipkaart perChipkaart : chipkaarten) {
+                    reiziger.addChipkaart(perChipkaart);
+                }
                  reizigers.add(reiziger);
             }
+
             statement.close();
             return reizigers;
         } catch (Exception e) {
