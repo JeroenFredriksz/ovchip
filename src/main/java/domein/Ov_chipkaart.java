@@ -1,8 +1,11 @@
 package domein;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ov_chipkaart {
+    private List<Product> producten = new ArrayList<>();
     private int kaart_nummer;
     private Date geldig_tot;
     private int klasse;
@@ -37,6 +40,18 @@ public class Ov_chipkaart {
 
     public Reiziger getReiziger() {
         return reiziger;
+    }
+
+    public void addProduct(Product product) {
+        producten.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        producten.remove(product);
+    }
+
+    public List<Product> getProducten() {
+        return producten;
     }
 
     public String toString () {

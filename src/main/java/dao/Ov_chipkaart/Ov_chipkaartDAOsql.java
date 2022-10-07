@@ -1,6 +1,7 @@
 package dao.Ov_chipkaart;
 
 import dao.Adres.AdresDAOsql;
+import dao.Product.ProductDAOsql;
 import dao.Reiziger.ReizigerDAOsql;
 import domein.Ov_chipkaart;
 import domein.Reiziger;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
     private Connection connection;
     private ReizigerDAOsql reizigerDAOsql;
+    private ProductDAOsql productDAOsql;
 
     public Ov_chipkaartDAOsql(Connection connection) {
         this.connection = connection;
@@ -137,6 +139,10 @@ public class Ov_chipkaartDAOsql implements Ov_chipkaartDAO{
             System.out.println(e);
             return null;
         }
+    }
+
+    public void setProductDAOsql(ProductDAOsql productDAOsql) {
+        this.productDAOsql = productDAOsql;
     }
 
     public void setReizigerDAOsql(ReizigerDAOsql reizigerDAOsql) {
