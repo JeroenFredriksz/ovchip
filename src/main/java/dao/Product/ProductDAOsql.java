@@ -7,6 +7,9 @@ import domein.Product;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAOsql implements ProductDAO{
     private Connection connection;
@@ -48,21 +51,25 @@ public class ProductDAOsql implements ProductDAO{
     @Override
     public boolean update(Product product) {
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE product SET product_nummer = ?, naam = ?, beschrijving = ? where prijs = ?");
-            preparedStatement.setInt(1, product.getProductNummer());
-            preparedStatement.setString(2, product.getNaam());
-            preparedStatement.setString(3, product.getBeschrijving());
-            preparedStatement.setFloat(4, product.getPrijs());
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE product SET naam = ?, beschrijving = ? where prijs = ?");
+            preparedStatement.setString(1, product.getNaam());
+            preparedStatement.setString(2, product.getBeschrijving());
+            preparedStatement.setFloat(3, product.getPrijs());
             preparedStatement.execute();
             preparedStatement.close();
 
             if (product.getOv_chipkaarten().size() != 0) {
-                for (Ov_chipkaart perOvChipkaart : product.getOv_chipkaarten()) {
-                    PreparedStatement statement = connection.prepareStatement("UPDATE ov_chipkaart_product SET kaart_nummer = ?, product_nummer = ?");
-                    statement.setInt(1, perOvChipkaart.getKaart_nummer());
-                    statement.setInt(2, product.getProductNummer());
-                    statement.execute();
-                    statement.close();
+                PreparedStatement preparedStatement1 = connection.prepareStatement("select * from ov_chipkaart_product where product_nummer = ?");
+                preparedStatement1.setInt(1, product.getProductNummer());
+                ResultSet results = preparedStatement.executeQuery();
+
+                while (results.next()) {
+                    for (Ov_chipkaart perOvChipkaart : product.getOv_chipkaarten()) {
+
+                        if (perOvChipkaart.getKaart_nummer() == results.getInt(1)) {
+                            iets = perOvChipkaart.getKaart_nummer();
+                        }
+                    }
                 }
             }
             return true;
@@ -79,6 +86,12 @@ public class ProductDAOsql implements ProductDAO{
             preparedStatement.setInt(1, product.getProductNummer());
             preparedStatement.execute();
             preparedStatement.close();
+
+            if (product.getOv_chipkaarten().size() != 0) {
+                PreparedStatement preparedStatement1 = connection.prepareStatement("DELETE FROM ov_chipkaart_product WHERE product_nummer = ?");
+                preparedStatement1.execute();
+                preparedStatement1.close();
+            }
             return true;
         } catch (Exception e) {
             System.out.println(e);
