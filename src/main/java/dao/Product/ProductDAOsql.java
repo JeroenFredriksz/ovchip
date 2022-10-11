@@ -64,11 +64,22 @@ public class ProductDAOsql implements ProductDAO{
                 ResultSet results = preparedStatement.executeQuery();
 
                 while (results.next()) {
+                    Ov_chipkaart ov_chipkaart = null;
                     for (Ov_chipkaart perOvChipkaart : product.getOv_chipkaarten()) {
-
-                        if (perOvChipkaart.getKaart_nummer() == results.getInt(1)) {
-                            iets = perOvChipkaart.getKaart_nummer();
+                        if (results.getInt(2) == perOvChipkaart.getKaart_nummer()) {
+                            ov_chipkaart = perOvChipkaart;
                         }
+                    }
+                    if (ov_chipkaart == null) {
+                        PreparedStatement preparedStatement2 = connection.prepareStatement("DELETE FROM ov_chipkaart_product where kaart_nummer = ?");
+                        preparedStatement2.setInt(1, results.getInt(2));
+                        preparedStatement.execute();
+                    }
+                    else {
+
+                        PreparedStatement preparedStatement2 = connection.prepareStatement("UPDATE ov_chipkaart_product SET status = ?, last_update = ? where ");
+                        preparedStatement2.setString(1, "actief");
+                        ov_chipkaart.
                     }
                 }
             }
